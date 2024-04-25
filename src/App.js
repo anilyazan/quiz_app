@@ -11,14 +11,14 @@ const App = () => {
 
   return (
     <Router>
-      <div className="bg-red-500 text-white p-4">Merhaba, Tailwind CSS!</div>
+      
 
 
-      <div>
+      <div style={{ backgroundColor: '#8b93f0', minHeight: '100vh', padding: '20px' }}>
         {!showQuiz && (
-          <div>
-            <h1>Welcome to the test. Press the start button to begin.</h1>
-            <button onClick={handleStartQuiz}>Start</button>
+          <div style={{ textAlign: 'center', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Welcome to the test. Press the start button to begin.</h1>
+            <button style={{ backgroundColor: '#afed98', color: 'black', padding: '20px 40px', borderRadius: '5px', marginTop: '20px', cursor: 'pointer',fontWeight: 'bold' }}  onClick={handleStartQuiz}>Start</button>
           </div>
         )}
         {showQuiz && (
