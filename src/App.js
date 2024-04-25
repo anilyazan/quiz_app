@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Quiz from './components/Quiz';
-import "tailwindcss/tailwind.css";
-
+import "./styles/tailwind.css"
 const App = () => {
   const [showQuiz, setShowQuiz] = useState(false);
 
@@ -12,6 +11,9 @@ const App = () => {
 
   return (
     <Router>
+      <div className="bg-red-500 text-white p-4">Merhaba, Tailwind CSS!</div>
+
+
       <div>
         {!showQuiz && (
           <div>
