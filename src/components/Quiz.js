@@ -99,6 +99,7 @@ function Quiz() {
                 <table>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Questions</th>
                             <th>Your Answers</th>
                             <th>Correct Answers</th>
@@ -107,6 +108,7 @@ function Quiz() {
                     <tbody>
                         {userResponses.map((response, index) => (
                             <tr key={index}>
+                                <td>{index +1 } </td>
                                 <td>{response.question}</td>
                                 <td>{response.response}</td>
                                 <td>{response.correctAnswer}</td>
