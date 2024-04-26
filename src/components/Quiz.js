@@ -118,29 +118,26 @@ function Quiz() {
   const renderOptions = () => {
     if (currentIndex < questions.length) {
       return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="flex flex-col">
           {questions[currentIndex].options.map((option, index) => (
-             <React.Fragment key={index}>
-             {index !== 0 && <div style={{ marginBottom: "10px" }} />} {}
-            <Button
-              key={index}
-              variant="outlined"
-              onClick={() => handleOptionClick(index)}
-              disabled={!isActive}
-              sx={{ width: "40%",
-              marginBottom: isMobile ? 10 : 5,
-              margin: "auto",
-              textAlign: "center", }}
-            >
-              
-               {option}
-            </Button>
+            <React.Fragment key={index}>
+              {index !== 0 && <div className="mb-4" />}
+              <button
+                className="border border-blue-300 bg-white hover:shadow-md hover:-translate-y-1 transition-transform duration-150 flex-grow text-base py-2 px-4 w-1/4 mx-auto "
+                onClick={() => handleOptionClick(index)}
+                disabled={!isActive}
+                style={{ maxWidth: "200px", whiteSpace: "normal", wordWrap: "break-word" }}
+              >
+                {option}
+              </button>
             </React.Fragment>
           ))}
         </div>
       );
     }
   };
+  
+  
   
   const renderResult = () => {
     return (
