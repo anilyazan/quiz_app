@@ -117,15 +117,22 @@ function Quiz() {
 
   const renderOptions = () => {
     if (currentIndex < questions.length) {
+      const buttonWidth = isMobile ? "100%" : "25%";
       return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           {questions[currentIndex].options.map((option, index) => (
             <Button
               key={index}
               variant="outlined"
               onClick={() => handleOptionClick(index)}
               disabled={!isActive}
-              sx={{ marginBottom: 2 }}
+              sx={{ marginBottom: 2, width: buttonWidth }}
             >
               {option}
             </Button>
@@ -134,7 +141,7 @@ function Quiz() {
       );
     }
   };
-  
+
   const renderResult = () => {
     return (
       <AnswerPaper elevation={3}>
@@ -157,8 +164,12 @@ function Quiz() {
                 <TableRow>
                   <TableCell sx={{ fontWeight: "bold" }}>#</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Questions</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Your Answers</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Correct Answers</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>
+                    Your Answers
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>
+                    Correct Answers
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -172,7 +183,9 @@ function Quiz() {
                           : "#f0bdbd",
                     }}
                   >
-                    <TableCell sx={{ fontWeight: "bold" }}>{index + 1}</TableCell>
+                    <TableCell sx={{ fontWeight: "bold" }}>
+                      {index + 1}
+                    </TableCell>
                     <TableCell>{response.question}</TableCell>
                     <TableCell>{response.response}</TableCell>
                     <TableCell>{response.correctAnswer}</TableCell>
@@ -185,7 +198,6 @@ function Quiz() {
       </AnswerPaper>
     );
   };
-  
 
   return (
     <div>
