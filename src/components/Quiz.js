@@ -117,7 +117,7 @@ function Quiz() {
 
   const renderOptions = () => {
     if (currentIndex < questions.length) {
-      const buttonWidth = isMobile ? "100%" : "25%";
+      const buttonWidth = isMobile ? "100%" : "20%";
       return (
         <div
           style={{
@@ -132,7 +132,13 @@ function Quiz() {
               variant="outlined"
               onClick={() => handleOptionClick(index)}
               disabled={!isActive}
-              sx={{ marginBottom: 2, width: buttonWidth }}
+              style={{ marginBottom:10,
+                width: buttonWidth,
+                display: "flex",
+                justifyContent: "flex-start",
+                textAlign: "left",
+                textTransform: "capitalize",
+                paddingLeft: 10, }}
             >
               {option}
             </Button>
@@ -207,7 +213,8 @@ function Quiz() {
         <QuestionPaper elevation={3}>
           <Typography variant="h5" gutterBottom>
             <span style={{ fontWeight: "bold" }}> {currentIndex + 1}:</span>{" "}
-            {questions[currentIndex]?.title}?
+            {questions[currentIndex]?.title.charAt(0).toUpperCase() +
+            questions[currentIndex]?.title.slice(1)}?
           </Typography>
           <br />
           <br />
