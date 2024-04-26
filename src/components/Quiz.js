@@ -21,12 +21,12 @@ function Quiz() {
     const period = 30;
 
     
-    const [isEnabled, setEnabled] = useState(false);
-    const [totalQuestions, setTotalQuestions] = useState(fetchedCount);
+    const [isActive, setActive] = useState(false);
+    const [totalQs, setTotalQs] = useState(fetchedCount);
     const [questions, setQuestions] = useState([]);
     const [countdown, setCountdown] = useState(period);
-    const [showResult, setShowResult] = useState(false);
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [displayResult, setDisplayResult] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [userResponses, setUserResponses] = useState([]);
     
     
@@ -42,7 +42,7 @@ function Quiz() {
                     options: [`A) ${question.body.split(" ")[0]}`, `B) ${question.body.split(" ")[1]}`, `C) ${question.body.split(" ")[2]}`, `D) ${question.body.split(" ")[3]}`],
                     correctAnswer: `C) ${question.body.split(" ")[2]}`
                 }));
-                setTotalQuestions(formattedQuestions.length);
+                setTotalQs(formattedQuestions.length);
                 setQuestions(formattedQuestions);
             } catch (error) {
                 console.error('Fetch error:', error);
@@ -57,38 +57,38 @@ function Quiz() {
             const timer = setTimeout(() => {
                 setCountdown(countdown - 1);
                 if ((countdown - 1) <= 20) {
-                    setEnabled(true);
+                    setActive(true);
                 }
             }, 1000);
 
             return () => clearTimeout(timer);
         } else {
-            setEnabled(false);
-            if (questions[currentQuestionIndex] !== undefined)
-                setUserResponses([...userResponses, { question: questions[currentQuestionIndex].title, response: 'No Selection', correctAnswer: questions[currentQuestionIndex].correctAnswer }])
+            setActive(false);
+            if (questions[currentIndex] !== undefined)
+                setUserResponses([...userResponses, { question: questions[currentIndex].title, response: 'No Selection', correctAnswer: questions[currentIndex].correctAnswer }])
             handleNextQuestion();
         }
     }, [countdown]);
 
     const handleOptionClick = (selectedOption) => {
-        const selectedAnswer = questions[currentQuestionIndex].options[selectedOption];
-        setUserResponses([...userResponses, { question: questions[currentQuestionIndex].title, response: selectedAnswer, correctAnswer: questions[currentQuestionIndex].correctAnswer }]);
-        setEnabled(false);
+        const selectedAnswer = questions[currentIndex].options[selectedOption];
+        setUserResponses([...userResponses, { question: questions[currentIndex].title, response: selectedAnswer, correctAnswer: questions[currentIndex].correctAnswer }]);
+        setActive(false);
         handleNextQuestion();
     };
 
     const handleNextQuestion = () => {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setCurrentIndex(currentIndex + 1);
         setCountdown(period);
-        if (currentQuestionIndex + 1 === questions.length) {
-            setShowResult(true);
+        if (currentIndex + 1 === questions.length) {
+            setDisplayResult(true);
         }
     };
 
     const renderOptions = () => {
-        if (currentQuestionIndex < questions.length) {
-            return questions[currentQuestionIndex].options.map((option, index) => (
-                <Button variant="outlined" key={index} onClick={() => handleOptionClick(index)} disabled={!isEnabled}>
+        if (currentIndex < questions.length) {
+            return questions[currentIndex].options.map((option, index) => (
+                <Button variant="outlined" key={index} onClick={() => handleOptionClick(index)} disabled={!isActive}>
                     {option}
                 </Button>
             ));
@@ -127,12 +127,12 @@ function Quiz() {
 
     return (
         <div>
-            {showResult ? (
+            {displayResult ? (
                 renderResult()
             ) : (
                 <QuestionPaper elevation={3}>
                 <Typography variant="h5" gutterBottom>
-                <span style={{ fontWeight: 'bold' }}> {currentQuestionIndex + 1}:</span>  {questions[currentQuestionIndex]?.title}?
+                <span style={{ fontWeight: 'bold' }}> {currentIndex + 1}:</span>  {questions[currentIndex]?.title}?
                 </Typography>
                 <br>
                 </br>
@@ -145,7 +145,7 @@ function Quiz() {
                     Countdown: {countdown}
                 </Typography>
                 <Typography variant="body1" gutterBottom style={{ color: 'green' }}> 
-                    Question: {currentQuestionIndex + 1}/{totalQuestions}
+                    Question: {currentIndex + 1}/{totalQs}
                 </Typography>
             </QuestionPaper>
             
