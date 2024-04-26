@@ -117,20 +117,24 @@ function Quiz() {
 
   const renderOptions = () => {
     if (currentIndex < questions.length) {
-      return questions[currentIndex].options.map((option, index) => (
-        <Button
-          variant="outlined"
-          key={index}
-          onClick={() => handleOptionClick(index)}
-          disabled={!isActive}
-          sx={{ marginBottom: isMobile ? 10 : 0 }}
-        >
-          {option}
-        </Button>
-      ));
+      return (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {questions[currentIndex].options.map((option, index) => (
+            <Button
+              key={index}
+              variant="outlined"
+              onClick={() => handleOptionClick(index)}
+              disabled={!isActive}
+              sx={{ marginBottom: 2 }}
+            >
+              {option}
+            </Button>
+          ))}
+        </div>
+      );
     }
   };
-
+  
   const renderResult = () => {
     return (
       <AnswerPaper elevation={3}>
