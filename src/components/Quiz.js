@@ -117,15 +117,28 @@ function Quiz() {
 
   const renderOptions = () => {
     if (currentIndex < questions.length) {
+      const buttonWidth = isMobile ? "100%" : "20%";
       return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           {questions[currentIndex].options.map((option, index) => (
             <Button
               key={index}
               variant="outlined"
               onClick={() => handleOptionClick(index)}
               disabled={!isActive}
-              sx={{ marginBottom: 2 }}
+              style={{ marginBottom:10,
+                width: buttonWidth,
+                display: "flex",
+                justifyContent: "flex-start",
+                textAlign: "left",
+                textTransform: "capitalize",
+                paddingLeft: 10, }}
             >
               {option}
             </Button>
@@ -134,7 +147,7 @@ function Quiz() {
       );
     }
   };
-  
+
   const renderResult = () => {
     return (
       <AnswerPaper elevation={3}>
@@ -157,8 +170,12 @@ function Quiz() {
                 <TableRow>
                   <TableCell sx={{ fontWeight: "bold" }}>#</TableCell>
                   <TableCell sx={{ fontWeight: "bold" }}>Questions</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Your Answers</TableCell>
-                  <TableCell sx={{ fontWeight: "bold" }}>Correct Answers</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>
+                    Your Answers
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>
+                    Correct Answers
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -172,7 +189,9 @@ function Quiz() {
                           : "#f0bdbd",
                     }}
                   >
-                    <TableCell sx={{ fontWeight: "bold" }}>{index + 1}</TableCell>
+                    <TableCell sx={{ fontWeight: "bold" }}>
+                      {index + 1}
+                    </TableCell>
                     <TableCell>{response.question}</TableCell>
                     <TableCell>{response.response}</TableCell>
                     <TableCell>{response.correctAnswer}</TableCell>
@@ -185,7 +204,6 @@ function Quiz() {
       </AnswerPaper>
     );
   };
-  
 
   return (
     <div>
@@ -195,7 +213,8 @@ function Quiz() {
         <QuestionPaper elevation={3}>
           <Typography variant="h5" gutterBottom>
             <span style={{ fontWeight: "bold" }}> {currentIndex + 1}:</span>{" "}
-            {questions[currentIndex]?.title}?
+            {questions[currentIndex]?.title.charAt(0).toUpperCase() +
+            questions[currentIndex]?.title.slice(1)}?
           </Typography>
           <br />
           <br />
