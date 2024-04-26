@@ -120,15 +120,22 @@ function Quiz() {
       return (
         <div style={{ display: "flex", flexDirection: "column" }}>
           {questions[currentIndex].options.map((option, index) => (
+             <React.Fragment key={index}>
+             {index !== 0 && <div style={{ marginBottom: "10px" }} />} {}
             <Button
               key={index}
               variant="outlined"
               onClick={() => handleOptionClick(index)}
               disabled={!isActive}
-              sx={{ marginBottom: 2 }}
+              sx={{ width: "40%",
+              marginBottom: isMobile ? 10 : 5,
+              margin: "auto",
+              textAlign: "center", }}
             >
-              {option}
+              
+               {option}
             </Button>
+            </React.Fragment>
           ))}
         </div>
       );
