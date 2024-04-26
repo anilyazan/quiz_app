@@ -10,6 +10,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 
 const QuestionPaper = styled(Paper)(({ theme }) => ({
@@ -29,6 +30,7 @@ const AnswerPaper = styled(Paper)(({ theme }) => ({
 function Quiz() {
   const fetchedCount = 10;
   const period = 30;
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const [isActive, setActive] = useState(false);
   const [totalQs, setTotalQs] = useState(fetchedCount);
@@ -121,6 +123,7 @@ function Quiz() {
           key={index}
           onClick={() => handleOptionClick(index)}
           disabled={!isActive}
+          sx={{ marginBottom: isMobile ? 10 : 0 }}
         >
           {option}
         </Button>
@@ -134,50 +137,51 @@ function Quiz() {
         <Typography variant="h5" align="center" sx={{ fontWeight: "bold" }}>
           Exam Result
         </Typography>
-        <TableContainer
-          sx={{
-            border: "1px solid #000",
-            borderRadius: 5,
-            overflow: "hidden",
-            marginTop: 2,
-            maxWidth: 1000,
-            margin: "auto",
-          }}
-        >
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell sx={{ fontWeight: "bold" }}>#</TableCell>
-                <TableCell sx={{ fontWeight: "bold" }}>Questions</TableCell>
-                <TableCell sx={{ fontWeight: "bold" }}>Your Answers</TableCell>
-                <TableCell sx={{ fontWeight: "bold" }}>
-                  Correct Answers
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {userResponses.map((response, index) => (
-                <TableRow
-                  key={index}
-                  sx={{
-                    backgroundColor:
-                      response.response === response.correctAnswer
-                        ? "#afed98"
-                        : "#f0bdbd",
-                  }}
-                >
-                  <TableCell sx={{ fontWeight: "bold" }}>{index + 1}</TableCell>
-                  <TableCell>{response.question}</TableCell>
-                  <TableCell>{response.response}</TableCell>
-                  <TableCell>{response.correctAnswer}</TableCell>
+        <div style={{ overflowX: "auto" }}>
+          <TableContainer
+            sx={{
+              border: "1px solid #000",
+              borderRadius: 5,
+              overflowY: "auto",
+              marginTop: 2,
+              maxWidth: 1000,
+              margin: "auto",
+            }}
+          >
+            <Table sx={{ minWidth: 650 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "bold" }}>#</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>Questions</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>Your Answers</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>Correct Answers</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {userResponses.map((response, index) => (
+                  <TableRow
+                    key={index}
+                    sx={{
+                      backgroundColor:
+                        response.response === response.correctAnswer
+                          ? "#afed98"
+                          : "#f0bdbd",
+                    }}
+                  >
+                    <TableCell sx={{ fontWeight: "bold" }}>{index + 1}</TableCell>
+                    <TableCell>{response.question}</TableCell>
+                    <TableCell>{response.response}</TableCell>
+                    <TableCell>{response.correctAnswer}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </AnswerPaper>
     );
   };
+  
 
   return (
     <div>
@@ -189,10 +193,10 @@ function Quiz() {
             <span style={{ fontWeight: "bold" }}> {currentIndex + 1}:</span>{" "}
             {questions[currentIndex]?.title}?
           </Typography>
-          <br></br>
-          <br></br>
+          <br />
+          <br />
           <div>{renderOptions()}</div>
-          <br></br> <br></br>
+          <br /> <br />
           <Typography variant="body1" gutterBottom style={{ color: "red" }}>
             Time: {countdown}
           </Typography>
