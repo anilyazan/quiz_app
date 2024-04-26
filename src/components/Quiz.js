@@ -48,7 +48,8 @@ function Quiz() {
         );
         const data = await response.json();
         const slicedData = data.slice(0, fetchedCount);
-        const formattedQuestions = slicedData.map((question) => ({
+        const correctAnswers = ["A", "B", "C", "D"];
+        const formattedQuestions = slicedData.map((question, index) => ({
           title: question.body,
           options: [
             `A) ${question.body.split(" ")[0]}`,
@@ -56,8 +57,11 @@ function Quiz() {
             `C) ${question.body.split(" ")[2]}`,
             `D) ${question.body.split(" ")[3]}`,
           ],
-          correctAnswer: `C) ${question.body.split(" ")[2]}`,
+          correctAnswer: `${correctAnswers[index % 4]}) ${
+            question.body.split(" ")[index % 4]
+          }`,
         }));
+
         setTotalQs(formattedQuestions.length);
         setQuestions(formattedQuestions);
       } catch (error) {
