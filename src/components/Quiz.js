@@ -132,13 +132,15 @@ function Quiz() {
               variant="outlined"
               onClick={() => handleOptionClick(index)}
               disabled={!isActive}
-              style={{ marginBottom:10,
+              style={{
+                marginBottom: 10,
                 width: buttonWidth,
                 display: "flex",
                 justifyContent: "flex-start",
                 textAlign: "left",
                 textTransform: "capitalize",
-                paddingLeft: 10, }}
+                paddingLeft: 10,
+              }}
             >
               {option}
             </Button>
@@ -214,7 +216,8 @@ function Quiz() {
           <Typography variant="h5" gutterBottom>
             <span style={{ fontWeight: "bold" }}> {currentIndex + 1}:</span>{" "}
             {questions[currentIndex]?.title.charAt(0).toUpperCase() +
-            questions[currentIndex]?.title.slice(1)}?
+              questions[currentIndex]?.title.slice(1)}
+            ?
           </Typography>
           <br />
           <br />
