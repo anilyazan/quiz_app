@@ -198,9 +198,20 @@ function Quiz() {
                     <TableCell sx={{ fontWeight: "bold" }}>
                       {index + 1}
                     </TableCell>
-                    <TableCell>{response.question}</TableCell>
-                    <TableCell>{response.response}</TableCell>
-                    <TableCell>{response.correctAnswer}</TableCell>
+                    <TableCell>
+                      {response.question.charAt(0).toUpperCase() +
+                        response.question.slice(1)}
+                    </TableCell>
+                    <TableCell>
+                      {response.response.slice(0, 3) +
+                        response.response.charAt(3).toUpperCase() +
+                        response.response.slice(4)}
+                    </TableCell>
+                    <TableCell>
+                      {response.correctAnswer.slice(0, 3) +
+                        response.correctAnswer.charAt(3).toUpperCase() +
+                        response.correctAnswer.slice(4)}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
